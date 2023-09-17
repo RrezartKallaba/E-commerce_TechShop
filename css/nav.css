@@ -1,0 +1,32 @@
+header {
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    background-color: #102030;
+    z-index: 999;
+}
+
+#img1 {
+    height: 180px;
+    width: 140px;
+    margin-top: -50px;
+    float: left;
+    margin-left: -20px;
+}
+
+header nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+
+header nav a {
+    font-size: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 35px;
+    padding: 30px 10px;
+    color: white;
+    text-decoration: none;
+}
