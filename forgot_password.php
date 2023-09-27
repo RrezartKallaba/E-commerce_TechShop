@@ -1,19 +1,10 @@
-<?php
-if (isset($_SESSION["admin"])) {
-    header("Location: admin/dashboard.php");
-}
-
-if (isset($_SESSION["user"])) {
-    header("Location: home.php");
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Reset Password</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
     <style>
@@ -87,37 +78,26 @@ if (isset($_SESSION["user"])) {
 <body>
     <div class="container mt-4">
         <div class="bg-color-1">
-            <h3 class="text-center">Login</h3>
-            <br><?php require "validate/validateLogin.php" ?>
+            <h3 class="text-center">Reset Password</h3>
+            <br><?php require "validate/validateForgotPassword.php" ?>
             <div class="row-2">
                 <form method="post" autocomplete="off">
                     <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" value="<?php if (empty($emailError)) echo $email; ?>">
-                        <span class="text-danger"><?= $emailError ?></span>
+                        <?php
+                        if (isset($_SESSION['attempts_number'])) {
+                            echo "<div class='alert alert-danger'>
+                                <p style='text-align:center;'>" . $_SESSION['attempts_number'] . "</p>
+                              </div>";
+                        } else {
+                        ?>
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" name="email" value="<?php if (empty($emailError)) echo $email; ?>">
+                            <span class="text-danger"><?= $emailError ?></span>
+                        <?php
+                        }
+                        ?>
                     </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="myInput" name="password">
-                        <span class="text-danger"><?= $passError ?></span>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" onclick="myFunction()"> Show password</label>
-                        <script>
-                            function myFunction() {
-                                var x = document.getElementById("myInput");
-                                if (x.type === "password") {
-                                    x.type = "text";
-                                } else {
-                                    x.type = "password";
-                                }
-                            }
-                        </script>
-                    </div>
-                    <p style="font-size: 15px;text-align: center !important;padding: 10px 12px 0 14px">Don't have an account?<a href="register.php"> Sign up</a>
-                        <br>
-                        <a href="forgot_password.php">Forgot Password</a>
-                    </p>
+                    <p style="font-size: 15px;text-align: center !important;padding: 10px 12px 0 14px">Go back to <a href="login.php">Login</a></p>
                     <div class="btn-center">
                         <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

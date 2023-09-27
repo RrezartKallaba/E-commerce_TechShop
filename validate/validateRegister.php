@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else if (strlen($lname) < 3) {
         $error = true;
         $errorLname = "Name must have at least 3 characters.";
-    } elseif (!preg_match("/^[a-zA-Z\s]+$/", $fname)) {
+    } elseif (!preg_match("/^[a-zA-Z\s]+$/", $lname)) {
         $error = true;
         $errorLname = "Name must contain only letters and spaces.";
     }

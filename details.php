@@ -90,7 +90,7 @@ session_start();
         }
 
         .fixed-area {
-            height: 425px;
+            height: auto;
         }
 
         .border-b-1 {

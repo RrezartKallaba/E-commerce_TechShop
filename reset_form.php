@@ -13,7 +13,7 @@ if (isset($_SESSION["user"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Reseting Password</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
     <style>
@@ -68,6 +68,7 @@ if (isset($_SESSION["user"])) {
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-top: 30px;
         }
 
         .btn {
@@ -87,25 +88,31 @@ if (isset($_SESSION["user"])) {
 <body>
     <div class="container mt-4">
         <div class="bg-color-1">
-            <h3 class="text-center">Login</h3>
-            <br><?php require "validate/validateLogin.php" ?>
+            <h3 class="text-center">Reseting Password</h3>
+            <br><?php require "validate/validateResetForm.php" ?>
             <div class="row-2">
                 <form method="post" autocomplete="off">
                     <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" value="<?php if (empty($emailError)) echo $email; ?>">
-                        <span class="text-danger"><?= $emailError ?></span>
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="myInput1" name="password">
+                        <span class="text-danger"><?= $passwrdErrror . $confirmPwdMismatch ?></span>
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="myInput" name="password">
-                        <span class="text-danger"><?= $passError ?></span>
+                        <label for="confpassword">Confirm Password</label>
+                        <input type="password" class="form-control" id="myInput2" name="confpassword">
+                        <span class="text-danger"><?= $confrmPasswdEmpty  . $confirmPwdMismatch ?></span>
                     </div>
                     <div class="checkbox">
                         <label><input type="checkbox" onclick="myFunction()"> Show password</label>
                         <script>
                             function myFunction() {
-                                var x = document.getElementById("myInput");
+                                var x = document.getElementById("myInput1");
+                                if (x.type === "password") {
+                                    x.type = "text";
+                                } else {
+                                    x.type = "password";
+                                }
+                                var x = document.getElementById("myInput2");
                                 if (x.type === "password") {
                                     x.type = "text";
                                 } else {
@@ -114,10 +121,6 @@ if (isset($_SESSION["user"])) {
                             }
                         </script>
                     </div>
-                    <p style="font-size: 15px;text-align: center !important;padding: 10px 12px 0 14px">Don't have an account?<a href="register.php"> Sign up</a>
-                        <br>
-                        <a href="forgot_password.php">Forgot Password</a>
-                    </p>
                     <div class="btn-center">
                         <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

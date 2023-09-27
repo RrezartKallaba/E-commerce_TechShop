@@ -7,7 +7,7 @@
         <span style="font-size: 13px;color: rgb(203, 28, 28,1);"> Max quantity: <?php echo $rowQuantity['quantity'] ?></span>
         <div class="cart-price"><?php echo $row['price'] . '€' ?></div>
         <div style="display: flex;flex-direction: row;">
-            <p style="font-size: 15px;padding: 0px;margin:0px;">Quantity: </p><input class="cart-quantity" type="number" name="quantity" value="<?php echo $row['quantity'] ?>" max="<?php echo $availableQuantity; ?>" onchange="quantityChanged(event)" data-product-id="<?php echo $row['product_id']; ?>" />
+            <p style="font-size: 15px;padding: 0px;margin:0px;">Quantity: </p><input class="cart-quantity" type="number" name="quantity" value="<?php echo $row['quantity'] ?>" min="1" max="<?php echo $availableQuantity; ?>" onchange="quantityChanged(event)" data-product-id="<?php echo $row['product_id']; ?>" />
         </div>
     </div>
     <a href="validate/delete_cart_product.php?cart_id=<?php echo $row['cart_id']; ?>" style="display: block;border: none; margin-right: 0px; padding: 0px; color: black; text-decoration: none;">

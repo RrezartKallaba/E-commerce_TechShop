@@ -839,7 +839,7 @@ footer {
     }
 }
 
-@media (max-height: 600px) {
+@media (max-height: 600px) and (max-width: 600px) {
     .menu a {
         display: block;
         padding: 8px 40px 8px 16px !important;

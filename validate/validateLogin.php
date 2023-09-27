@@ -11,7 +11,7 @@ if (isset($_SESSION["user"])) {
     header("Location: home.php");
 }
 
-$email = $passError = $emailError = "";
+$email = $password = $passError = $emailError = "";
 $error = false;
 
 function cleanInputs($input)
