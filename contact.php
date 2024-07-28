@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (mysqli_query($connect, $sql)) {
             $_SESSION["contact_form"] = "✅Contact form submitted successfully!";
-            header("Location: home.php");
+            header("Location: index.php");
         } else {
             echo   "<div class='alert alert-danger'>
                     <p>Something went wrong, please try again later ...</p>
@@ -198,6 +198,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </section>
     <footer>©2023 Tech Shop</footer>
+    <script>
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        }, false);
+
+        document.addEventListener("keydown", function(e) {
+            if (e.key == "F12") {
+                e.preventDefault();
+            }
+        });
+    </script>
     <script src="main.js"></script>
 </body>
 

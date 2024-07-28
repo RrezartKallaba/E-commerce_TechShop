@@ -4,7 +4,7 @@ if (isset($_SESSION["admin"])) {
 }
 
 if (isset($_SESSION["user"])) {
-    header("Location: home.php");
+    header("Location: index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -127,6 +127,17 @@ if (isset($_SESSION["user"])) {
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        }, false);
+
+        document.addEventListener("keydown", function(e) {
+            if (e.key == "F12") {
+                e.preventDefault();
+            }
+        });
+    </script>
 </body>
 
 </html>

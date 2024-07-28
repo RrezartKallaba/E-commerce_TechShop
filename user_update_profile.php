@@ -44,7 +44,7 @@ if (isset($_SESSION["user"])) {
 
         if (mysqli_query($connect, $sql)) {
             $_SESSION['profile_message'] = "Profile has been updated!";
-            echo "<script>window . location . href = 'home.php'</script>";
+            echo "<script>window . location . href = 'index.php'</script>";
         } else {
             echo "Error updating profile: " . mysqli_error($connect);
         }
@@ -127,7 +127,7 @@ if (isset($_SESSION["user"])) {
                                     <small class="form-text text-muted">Upload a new profile image if you want to change it.</small>
                                 </div>
                                 <div style="display: flex;justify-content:center" class="buttons">
-                                    <a style="text-decoration: none;" href="home.php" class="btn btn-outline-info width-btn-2">Back</a>
+                                    <a style="text-decoration: none;" href="index.php" class="btn btn-outline-info width-btn-2">Back</a>
                                     <button type="submit" name="update" class="btn btn-primary  width-btn-2">Update Profile</button>
                                 </div>
                             </form>
@@ -136,6 +136,17 @@ if (isset($_SESSION["user"])) {
                 </div>
             </div>
         </div>
+        <script>
+            document.addEventListener("contextmenu", function(e) {
+                e.preventDefault();
+            }, false);
+
+            document.addEventListener("keydown", function(e) {
+                if (e.key == "F12") {
+                    e.preventDefault();
+                }
+            });
+        </script>
     </body>
 
     </html>

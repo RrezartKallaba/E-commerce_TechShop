@@ -1,9 +1,9 @@
 <?php
 session_start();
 if (!isset($_SESSION["user"])) {
-    header("Location: home.php");
+    header("Location: index.php");
 } else {
-    header("refresh: 4; url=home.php");
+    header("refresh: 4; url=index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -88,6 +88,17 @@ if (!isset($_SESSION["user"])) {
             </text>
         </svg>
     </div>
+    <script>
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        }, false);
+
+        document.addEventListener("keydown", function(e) {
+            if (e.key == "F12") {
+                e.preventDefault();
+            }
+        });
+    </script>
 </body>
 
 </html>

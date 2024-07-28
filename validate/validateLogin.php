@@ -8,7 +8,7 @@ if (isset($_SESSION["admin"])) {
 }
 
 if (isset($_SESSION["user"])) {
-    header("Location: home.php");
+    header("Location: index.php");
 }
 
 $email = $password = $passError = $emailError = "";
@@ -63,23 +63,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $login_time = date('H:i:s', strtotime('+2 hours')); // Merr kohën aktuale dhe shton 2 orë
                     $login_date = date('Y-m-d');
 
-                    $sql_insert01 = "INSERT INTO time_dateLogin (user_id, user_email, status, time, date) VALUES ('$user_id', '$user_email', '$status', '$login_time', '$login_date')";
+                    $sql_insert01 = "INSERT INTO time_datelogin (user_id, user_email, status, time, date) VALUES ('$user_id', '$user_email', '$status', '$login_time', '$login_date')";
                     mysqli_query($connect, $sql_insert01);
 
                     header("Location: loading.php");
                 } else {
                     $_SESSION["admin"] = $row["id"];
                     $_SESSION["adminemail"] = $row["email"];
+                    $_SESSION["adminfullname"] = $row["first_name"] . " " . $row["last_name"];
                     $_SESSION["status"] = $row["status"];
 
                     $admin_id = $_SESSION["admin"];
                     $admin_email = $_SESSION["adminemail"];
+                    $admin_fullname = $_SESSION["adminfullname"];
                     $status = $_SESSION["status"];
                     $login_time = date('H:i:s', strtotime('+2 hours')); // Merr kohën aktuale dhe shton 2 orë
                     $login_date = date('Y-m-d');
 
-                    $sql_insert01 = "INSERT INTO time_dateLogin (user_id, user_email, status, time, date) VALUES ('$admin_id', '$admin_email', '$status', '$login_time', '$login_date')";
+                    $sql_insert01 = "INSERT INTO time_datelogin (user_id, user_email, status, time, date) VALUES ('$admin_id', '$admin_email', '$status', '$login_time', '$login_date')";
                     mysqli_query($connect, $sql_insert01);
+
                     header("Location: admin/dashboard.php");
                 }
             }

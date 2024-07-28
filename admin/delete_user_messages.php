@@ -10,24 +10,19 @@ if (!isset($_SESSION["admin"])) {
 }
 require "../validate/connect.php";
 
-$id = $_GET["id"];
-$sql = "SELECT * FROM users WHERE id = $id";
+$id = $_GET["user_messages_id"];
+$sql = "SELECT * FROM live_support WHERE user_id = $id";
 $result = mysqli_query($connect, $sql);
 
 if ($result && mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
-    if ($row["image"] != "user.png") {
-        unlink("../pictures/" . $row["image"]);
-    }
-
-    $delete = "DELETE FROM users WHERE id = $id";
+    $delete = "DELETE FROM live_support WHERE user_id = $id";
     if (mysqli_query($connect, $delete)) {
-        header("Location: dashboard.php?page=users");
+        header("Location: dashboard.php?page=admin_messages_to_user");
     } else {
         echo "Error: " . mysqli_error($connect);
     }
 } else {
     echo "Record not found";
 }
-
 mysqli_close($connect);

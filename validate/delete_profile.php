@@ -11,7 +11,7 @@ if (isset($_SESSION["user"])) {
         session_destroy();
         session_start();
         $_SESSION['profile_delete'] = "User deleted successfully.";
-        header("Location: ../home.php");
+        header("Location: ../index.php");
         exit();
     } else {
         echo "Error: " . mysqli_error($connect);

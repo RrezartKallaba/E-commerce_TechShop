@@ -4,8 +4,12 @@ if (isset($_SESSION["admin"])) {
 }
 
 if (isset($_SESSION["user"])) {
-    header("Location: home.php");
+    header("Location: index.php");
 }
+// * SHfaqja e gabimeve
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -124,6 +128,7 @@ if (isset($_SESSION["user"])) {
             </div>
         </div>
     </div>
+
 </body>
 
 </html>

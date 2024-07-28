@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 27, 2023 at 09:23 PM
+-- Generation Time: Oct 22, 2023 at 01:54 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.2.0
 
@@ -20,8 +20,33 @@ SET time_zone = "+00:00";
 --
 -- Database: `techshop`
 --
-CREATE DATABASE IF NOT EXISTS `techshop` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `techshop`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_msg_live_support`
+--
+
+DROP TABLE IF EXISTS `admin_msg_live_support`;
+CREATE TABLE IF NOT EXISTS `admin_msg_live_support` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `admin_id` int NOT NULL,
+  `status` varchar(20) DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  `admin_fullname` varchar(255) DEFAULT NULL,
+  `admin_email` varchar(255) DEFAULT NULL,
+  `message` text,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+);
+
+--
+-- Dumping data for table `admin_msg_live_support`
+--
+
+INSERT INTO `admin_msg_live_support` (`id`, `admin_id`, `status`, `user_id`, `admin_fullname`, `admin_email`, `message`, `created_at`) VALUES
+(78, 1, 'admin', 12, 'Rrezart Kallaba', 'rrezartkallaba@gmail.com', 'Pershendetje User', '2023-10-22 01:42:40');
 
 -- --------------------------------------------------------
 
@@ -41,15 +66,14 @@ CREATE TABLE IF NOT EXISTS `cart` (
   PRIMARY KEY (`cart_id`),
   KEY `user_id` (`user_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=253 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `cart`
 --
 
 INSERT INTO `cart` (`cart_id`, `user_id`, `product_id`, `image`, `name`, `price`, `quantity`) VALUES
-(251, 12, 2, '64e0e4012fc87.png', 'Apple MacBook Air 13.3\", M1 8-core, 8GB, 256GB, 7-core GPU, Space Grey', '999.00', 2),
-(252, 12, 54, 'phone4.png', 'Apple iPhone 14 Pro, 256GB, Deep Purple', '1499.00', 3);
+(258, 12, 2, '64e0e4012fc87.png', 'Apple MacBook Air 13.3\", M1 8-core, 8GB, 256GB, 7-core GPU, Space Grey', '999.00', 5);
 
 -- --------------------------------------------------------
 
@@ -62,12 +86,12 @@ CREATE TABLE IF NOT EXISTS `code_forgot_password` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `email` varchar(50) NOT NULL,
-  `random_code` varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `random_code` varchar(6)  NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `attempts` int NOT NULL DEFAULT '3',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=138 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 -- --------------------------------------------------------
 
@@ -78,20 +102,21 @@ CREATE TABLE IF NOT EXISTS `code_forgot_password` (
 DROP TABLE IF EXISTS `contactform`;
 CREATE TABLE IF NOT EXISTS `contactform` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `last_name` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `first_name` varchar(25)  NOT NULL,
+  `last_name` varchar(25)  NOT NULL,
   `email` varchar(50) NOT NULL,
-  `phone` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `phone` varchar(25)  NOT NULL,
   `message` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `contactform`
 --
 
 INSERT INTO `contactform` (`id`, `first_name`, `last_name`, `email`, `phone`, `message`) VALUES
-(18, 'Melyssa', 'Thornton', 'kexoqaqut@gmail.com', '223112123123123', 'Ab proident velit');
+(18, 'Melyssa', 'Thornton', 'kexoqaqut@gmail.com', '223112123123123', 'Ab proident velit'),
+(19, 'Steel', 'Hudson', 'sytef@mailinator.com', '333333333', 'Nisi enim natus veli');
 
 -- --------------------------------------------------------
 
@@ -104,11 +129,11 @@ CREATE TABLE IF NOT EXISTS `favorite_products` (
   `favorite_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `product_id` int NOT NULL,
-  `favorite` enum('Yes','No') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'No',
+  `favorite` enum('Yes','No')  NOT NULL DEFAULT 'No',
   PRIMARY KEY (`favorite_id`),
   KEY `user_id` (`user_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `favorite_products`
@@ -116,12 +141,39 @@ CREATE TABLE IF NOT EXISTS `favorite_products` (
 
 INSERT INTO `favorite_products` (`favorite_id`, `user_id`, `product_id`, `favorite`) VALUES
 (6, 12, 48, 'Yes'),
-(5, 2, 2, 'No'),
+(5, 2, 2, 'Yes'),
 (4, 2, 1, 'Yes'),
-(7, 12, 2, 'No'),
+(7, 12, 2, 'Yes'),
 (8, 12, 1, 'Yes'),
-(9, 15, 2, 'No'),
-(10, 12, 50, 'Yes');
+(9, 15, 2, 'Yes'),
+(10, 12, 50, 'No'),
+(11, 12, 52, 'No'),
+(12, 12, 54, 'Yes');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `live_support`
+--
+
+DROP TABLE IF EXISTS `live_support`;
+CREATE TABLE IF NOT EXISTS `live_support` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `status` varchar(20)  NOT NULL,
+  `user_id` int NOT NULL,
+  `user_fullname` varchar(255)  NOT NULL,
+  `user_email` varchar(255)  NOT NULL,
+  `message` text  NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+
+--
+-- Dumping data for table `live_support`
+--
+
+INSERT INTO `live_support` (`id`, `status`, `user_id`, `user_fullname`, `user_email`, `message`, `created_at`) VALUES
+(398, 'user', 12, 'User User', 'user@gmail.com', 'Pershendetje Admin', '2023-10-22 01:42:35');
 
 -- --------------------------------------------------------
 
@@ -135,19 +187,19 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `user_id` int NOT NULL,
   `product_id` varchar(255) NOT NULL,
   `quantity` text NOT NULL,
-  `first_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `last_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `first_name` varchar(50)  NOT NULL,
+  `last_name` varchar(50)  NOT NULL,
   `address` varchar(100) NOT NULL,
   `country` varchar(100) NOT NULL,
   `city` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `phone` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `phone` varchar(20)  NOT NULL,
   `payment` varchar(10) NOT NULL,
   `totalprice` decimal(10,2) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `product_id` (`product_id`(250))
-) ENGINE=MyISAM AUTO_INCREMENT=124 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 -- --------------------------------------------------------
 
@@ -159,15 +211,15 @@ DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int NOT NULL AUTO_INCREMENT,
   `image` varchar(255) DEFAULT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `name` varchar(255)  NOT NULL,
+  `description` text  NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `quantity` int NOT NULL,
-  `category` enum('Laptop','Phone') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `category` enum('Laptop','Phone')  NOT NULL,
   `rating` int NOT NULL,
-  `is_hidden` enum('Yes','No') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'No',
+  `is_hidden` enum('Yes','No')  NOT NULL DEFAULT 'No',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `products`
@@ -199,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `reviews` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=150 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `reviews`
@@ -225,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `time_datelogin` (
   `date` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=199 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `time_datelogin`
@@ -317,7 +369,37 @@ INSERT INTO `time_datelogin` (`id`, `user_id`, `user_email`, `status`, `time`, `
 (195, 12, 'user@gmail.com', 'user', '21:42:32', '2023-09-26'),
 (196, 12, 'user@gmail.com', 'user', '21:45:47', '2023-09-26'),
 (197, 14, 'htaulant0@gmail.com', 'user', '22:06:46', '2023-09-26'),
-(198, 12, 'user@gmail.com', 'user', '23:10:28', '2023-09-27');
+(198, 12, 'user@gmail.com', 'user', '23:10:28', '2023-09-27'),
+(199, 1, 'rrezartkallaba@gmail.com', 'admin', '16:31:27', '2023-10-07'),
+(200, 12, 'user@gmail.com', 'user', '19:47:00', '2023-10-09'),
+(201, 1, 'rrezartkallaba@gmail.com', 'admin', '11:05:06', '2023-10-12'),
+(202, 12, 'user@gmail.com', 'user', '23:35:19', '2023-10-13'),
+(203, 12, 'user@gmail.com', 'user', '22:03:24', '2023-10-15'),
+(204, 12, 'user@gmail.com', 'user', '23:13:34', '2023-10-15'),
+(205, 12, 'user@gmail.com', 'user', '23:57:08', '2023-10-15'),
+(206, 12, 'user@gmail.com', 'user', '08:00:45', '2023-10-16'),
+(207, 1, 'rrezartkallaba@gmail.com', 'admin', '08:07:39', '2023-10-16'),
+(208, 1, 'rrezartkallaba@gmail.com', 'admin', '08:10:23', '2023-10-16'),
+(209, 12, 'user@gmail.com', 'user', '16:50:25', '2023-10-17'),
+(210, 1, 'rrezartkallaba@gmail.com', 'admin', '17:31:14', '2023-10-17'),
+(211, 12, 'user@gmail.com', 'user', '17:32:18', '2023-10-17'),
+(212, 12, 'user@gmail.com', 'user', '21:47:33', '2023-10-17'),
+(213, 12, 'user@gmail.com', 'user', '21:50:43', '2023-10-17'),
+(214, 12, 'user@gmail.com', 'user', '08:23:56', '2023-10-18'),
+(215, 12, 'user@gmail.com', 'user', '08:31:52', '2023-10-18'),
+(216, 1, 'rrezartkallaba@gmail.com', 'admin', '08:52:38', '2023-10-18'),
+(217, 1, 'rrezartkallaba@gmail.com', 'admin', '09:23:44', '2023-10-18'),
+(218, 12, 'user@gmail.com', 'user', '16:22:20', '2023-10-18'),
+(219, 12, 'user@gmail.com', 'user', '22:13:35', '2023-10-20'),
+(220, 1, 'rrezartkallaba@gmail.com', 'admin', '22:15:32', '2023-10-20'),
+(221, 12, 'user@gmail.com', 'user', '22:36:47', '2023-10-20'),
+(222, 1, 'rrezartkallaba@gmail.com', 'admin', '23:02:25', '2023-10-20'),
+(223, 1, 'rrezartkallaba@gmail.com', 'admin', '23:28:10', '2023-10-20'),
+(224, 1, 'rrezartkallaba@gmail.com', 'admin', '23:28:45', '2023-10-20'),
+(225, 1, 'rrezartkallaba@gmail.com', 'admin', '01:02:45', '2023-10-20'),
+(226, 1, 'rrezartkallaba@gmail.com', 'admin', '23:04:28', '2023-10-21'),
+(227, 12, 'user@gmail.com', 'user', '23:04:38', '2023-10-21'),
+(228, 1, 'rrezartkallaba@gmail.com', 'admin', '01:24:43', '2023-10-21');
 
 -- --------------------------------------------------------
 
@@ -335,11 +417,11 @@ CREATE TABLE IF NOT EXISTS `users` (
   `address` varchar(100) NOT NULL,
   `image` varchar(100) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
-  `status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'user',
+  `status` varchar(10)  NOT NULL DEFAULT 'user',
   `is_banned` enum('Yes','No') NOT NULL DEFAULT 'No',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+);
 
 --
 -- Dumping data for table `users`
@@ -348,8 +430,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `phone`, `address`, `image`, `password`, `status`, `is_banned`) VALUES
 (1, 'Rrezart', 'Kallaba', 'rrezartkallaba@gmail.com', '049123123', 'Suhareke', 'user.png', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'admin', 'No'),
 (14, 'Taulant', 'Hoxha', 'htaulant0@gmail.com', '4444444', 'asd', '64f224b09b3a6.png', '36639c32351b36ee920219578afa34e2743f2a10065bf42297fbccc75b29f10f', 'user', 'No'),
-(12, 'User', 'User', 'user@gmail.com', '123456789', 'Suhareke', '650386bc7048c.jpg', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'user', 'No'),
-(19, 'Rrezart', 'Kallaba', 'user019@gmail.com', '1234151515', 'Suhareke', '650463ba46ce3.jpg', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'user', 'No');
+(12, 'User', 'User', 'user@gmail.com', '123456789', 'Suhareke', '650386bc7048c.jpg', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 'user', 'No');
 
 DELIMITER $$
 --

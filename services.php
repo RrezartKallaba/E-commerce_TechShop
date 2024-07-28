@@ -57,6 +57,17 @@ session_start();
     </section>
 
     <footer>©2023 Tech Shop</footer>
+    <script>
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        }, false);
+
+        document.addEventListener("keydown", function(e) {
+            if (e.key == "F12") {
+                e.preventDefault();
+            }
+        });
+    </script>
     <script src="main.js"></script>
 </body>
 

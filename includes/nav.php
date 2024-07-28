@@ -17,7 +17,7 @@
                                                                                         } ?></p>
             </div>
         <?php } ?>
-        <a href="home.php" onclick="closeMenu()">Home</a>
+        <a href="index.php" onclick="closeMenu()">Home</a>
         <a href="products.php" onclick="closeMenu()">Products</a>
         <a href="services.php" onclick="closeMenu()">Services</a>
         <a href="contact.php" onclick="closeMenu()">Contact</a>
@@ -313,3 +313,14 @@
     </button>
 
 </header>
+<script>
+    document.addEventListener("contextmenu", function(e) {
+        e.preventDefault();
+    }, false);
+
+    document.addEventListener("keydown", function(e) {
+        if (e.key == "F12") {
+            e.preventDefault();
+        }
+    });
+</script>

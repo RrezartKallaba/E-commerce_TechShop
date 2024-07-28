@@ -179,7 +179,7 @@ if (isset($_SESSION["admin"])) {
             // if ($currentPage === $pageName) {
             //     echo ' active';
             // }
-            if ($currentPage === $pageName || ($pageName === 'animals' && $currentPage === 'update_animal') || ($pageName === 'animals' && $currentPage === 'details_animal')) {
+            if ($currentPage === $pageName || ($pageName === 'animals' && $currentPage === 'update_animal') || ($pageName === 'animals' && $currentPage === 'details_animal') || ($pageName === 'admin_messages_to_user' && $currentPage === 'details_admin_messages_to_user')) {
                 echo 'active';
             }
         }
@@ -195,6 +195,7 @@ if (isset($_SESSION["admin"])) {
                             <li class="<?php isActive($page, 'create_user'); ?>"><a href="?page=create_user">Create a user</a></li>
                             <li class="<?php isActive($page, 'products'); ?>"><a href="?page=products">Products</a></li>
                             <li class=" <?php isActive($page, 'create_product'); ?>"><a href="?page=create_product">Create a product</a></li>
+                            <li class=" <?php isActive($page, 'admin_messages_to_user'); ?>"><a href="?page=admin_messages_to_user">Users Messages</a></li>
                             <li class="<?php isActive($page, 'statistics'); ?>"><a href="?page=statistics">Statistics</a></li>
                             <li class="<?php isActive($page, 'profile'); ?>"><a href="?page=profile">Profile</a></li>
                             <li><a href="#" onclick="konfirmoDaljen()">Logout</a></li>
@@ -225,6 +226,10 @@ if (isset($_SESSION["admin"])) {
                         include "profile.php";
                     } elseif ($page === 'create_product') {
                         include "create_product.php";
+                    } elseif ($page === 'admin_messages_to_user') {
+                        include "admin_messages_to_user.php";
+                    } elseif ($page === 'details_admin_messages_to_user') {
+                        include "details_admin_messages_to_user.php";
                     } elseif ($page === 'create_user') {
                         include "create_user.php";
                     } elseif ($page === 'details_reviews') {
@@ -285,7 +290,7 @@ if (isset($_SESSION["admin"])) {
     </html>
 <?php
 } else if (isset($_SESSION["user"])) {
-    header("location:../home.php");
+    header("location:../index.php");
 } else {
     header("Location: ../login.php");
 }

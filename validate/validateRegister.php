@@ -5,7 +5,7 @@ if (isset($_SESSION["admin"])) {
 }
 
 if (isset($_SESSION["user"])) {
-    header("Location: home.php");
+    header("Location: index.php");
 }
 require "connect.php";
 require "file_uploadRegister.php";

@@ -4,7 +4,7 @@ if (isset($_SESSION["admin"])) {
 }
 
 if (isset($_SESSION["user"])) {
-    header("Location: home.php");
+    header("Location: index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -247,6 +247,17 @@ if (isset($_SESSION["user"])) {
 
         //focus the first input which index is 0 on window load
         window.addEventListener("load", () => inputs[0].focus());
+    </script>
+    <script>
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        }, false);
+
+        document.addEventListener("keydown", function(e) {
+            if (e.key == "F12") {
+                e.preventDefault();
+            }
+        });
     </script>
 </body>
 

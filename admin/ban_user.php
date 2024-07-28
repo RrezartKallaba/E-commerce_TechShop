@@ -1,23 +1,30 @@
 <?php
-require "../validate/connect.php";
+if (isset($_SESSION["admin"])) {
+    require "../validate/connect.php";
 
-if (isset($_GET["id"])) {
-    $user_id = $_GET["id"];
+    if (isset($_GET["id"])) {
+        $user_id = $_GET["id"];
 
-    // Fetch the current status
-    $fetch_status_query = "SELECT is_banned FROM users WHERE id = $user_id";
-    $fetch_result = mysqli_query($connect, $fetch_status_query);
-    $row = mysqli_fetch_assoc($fetch_result);
+        // Fetch the current status
+        $fetch_status_query = "SELECT is_banned FROM users WHERE id = $user_id";
+        $fetch_result = mysqli_query($connect, $fetch_status_query);
+        $row = mysqli_fetch_assoc($fetch_result);
 
-    // Toggle the status and update the database
-    $new_status = ($row["is_banned"] === 'Yes') ? 'No' : 'Yes';
-    $update_query = "UPDATE users SET is_banned = '$new_status' WHERE id = $user_id";
-    mysqli_query($connect, $update_query);
+        // Toggle the status and update the database
+        $new_status = ($row["is_banned"] === 'Yes') ? 'No' : 'Yes';
+        $update_query = "UPDATE users SET is_banned = '$new_status' WHERE id = $user_id";
+        mysqli_query($connect, $update_query);
 
-    // Redirect back to the previous page or wherever needed
-    header("Location: " . $_SERVER['HTTP_REFERER']);
+        // Redirect back to the previous page or wherever needed
+        header("Location: " . $_SERVER['HTTP_REFERER']);
+    } else {
+        echo "Invalid user ID";
+    }
+} else if (isset($_SESSION["user"])) {
+    header("location:../index.php");
 } else {
-    echo "Invalid user ID";
+    header("Location: ../login.php");
 }
+
 
 mysqli_close($connect);

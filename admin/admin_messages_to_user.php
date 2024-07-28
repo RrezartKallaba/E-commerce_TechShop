@@ -46,36 +46,44 @@ if (isset($_SESSION["admin"])) {
 
     <body>
         <div class="container">
-            <h2>Product List</h2>
+            <h2>Users Messages</h2>
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th class="hidden_for_phone">Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Action</th>
+                        <th>User Id</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                        <th>Created</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    $sql = "SELECT * FROM products";
+                    $sql = "SELECT ls.* 
+                    FROM live_support ls
+                    INNER JOIN (
+                        SELECT user_id, MAX(created_at) AS max_created_at
+                        FROM live_support
+                        GROUP BY user_id
+                    ) latest_msg
+                    ON ls.user_id = latest_msg.user_id
+                    AND ls.created_at = latest_msg.max_created_at";
+
                     $result = mysqli_query($connect, $sql);
 
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo '<tr>
-                    <td style="width: 70px;">' . $row["id"] . '</td>  
-                    <td style="width: 250px;"  class="hidden_for_phone">' . $row["name"] . '</td>
-                    <td>' . $row["price"] . '</td>
-                    <td>' . $row["quantity"] . '</td>
+                    <td style="width: 70px;">' . $row["id"] . '</td> 
+                    <td style="width: 70px;">' . $row["user_id"] . '</td> 
+                    <td>' . $row["user_fullname"] . '</td>
+                    <td>' . $row["user_email"] . '</td>
+                    <td>' . $row["message"] . '</td>
+                    <td>' . $row["created_at"] . '</td>
                     <td>
-                        <a href="?page=details_product&product_id=' . $row["id"] . '" class="btn btn-width btn-info">Details</a>
-                        <a href="?page=update_product&product_id=' . $row["id"] . '" class="btn btn-width btn-info">Update</a>
-                        <a href="?page=details_reviews&product_id=' . $row["id"] . '" class="btn btn-width btn-info">Reviews</a>
-                        <a href="hide_product.php?id=' . $row['id'] . '" class="btn  btn-width btn-' . ($row['is_hidden'] === 'Yes' ? 'success' : 'warning') . '">' .
-                            ($row["is_hidden"] === "Yes" ? "Unhide" : "Hide") .
-                            '</a>
-                        <a href="delete_product.php?product_id=' . $row["id"] . '" class="btn btn-width btn-danger" onclick="return confirm(\'Are you sure you want to delete this menu item?\')">Delete</a>
+                        <a href="?page=details_admin_messages_to_user&user_messages_id=' . $row["user_id"] . '" class="btn btn-width btn-info">Details</a>
+                        <a href="delete_user_messages.php?user_messages_id=' . $row["user_id"] . '" class="btn btn-width btn-danger" onclick="return confirm(\'Are you sure you want to delete this chat?\')">Delete</a>
                     </td>
                 </tr>';
                     }

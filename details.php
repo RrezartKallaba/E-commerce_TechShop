@@ -254,7 +254,7 @@ session_start();
                         <div class="height-card-review">
                             <?php
                             $product_id = $_GET['id'];
-                            $sql = "SELECT name FROM Products WHERE id = $product_id";
+                            $sql = "SELECT name FROM products WHERE id = $product_id";
                             $result3 = mysqli_query($connect, $sql);
                             $row3 = mysqli_fetch_assoc($result3)
                             ?>
@@ -340,6 +340,17 @@ session_start();
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        }, false);
+
+        document.addEventListener("keydown", function(e) {
+            if (e.key == "F12") {
+                e.preventDefault();
+            }
+        });
+    </script>
 </body>
 
 </html>
