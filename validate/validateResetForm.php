@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (empty($confpassword)) {
         $error = true;
-        $confrmPasswdEmpty = "Confirm pw cannot be empty!";
+        $confrmPasswdEmpty = "Confirm password cannot be empty!";
     } elseif (strlen($confpassword) < 8) {
         $error = true;
         $confrmPasswdEmpty = "Password must have at least 8 ch..";
